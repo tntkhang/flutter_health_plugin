@@ -13,12 +13,7 @@ Create health_service.dart and copy-paste this code:
 ```
 import 'dart:io';
 
-import 'package:flutter_bugfender/flutter_bugfender.dart';
 import 'package:health/health.dart';
-import 'package:walk2bfit/core/extension/date_time_extension.dart';
-import 'package:walk2bfit/core/extension/num_extension.dart';
-import 'package:walk2bfit/core/utils/logger.dart';
-import 'package:walk2bfit/feature/activity/data/model/activity_model.dart';
 
 
 class HealthServices {
@@ -111,18 +106,14 @@ class HealthServices {
           steps: totalSteps,
           distance: totalDistance.meterToMiles,
           calorie: totalCalories.toInt(),
-          time: totalMinutes.toInt(),
-          activityFromDate: start.yMdHmS,
-          activityToDate: end.yMdHmS
+          time: totalMinutes.toInt()
       );
 
-      Logger.i('Fetched Merged Activity: $resultActivity}');
     } catch (error, stackTrace) {
       Logger.e(
         'Failed to fetch health data: $error',
         stackTrace: stackTrace,
       );
-      FlutterBugfender.log('Fetched Health Exception: $error');
     }
   }
 
@@ -138,9 +129,6 @@ class HealthServices {
         Logger.e('User deny health permission');
         return ActivityModel();
       }
-
-
-      // int totalSteps = await health.getTotalStepsInInterval(start, end, dayInterval) ?? 0;
 
 
       int totalSteps = 0;
@@ -203,14 +191,8 @@ class HealthServices {
           steps: totalSteps,
           distance: totalDistance,
           calorie: totalCalories.toInt(),
-          time: totalMinutes.toInt(),
-          activityFromDate: start.yMdHmS,
-          activityToDate: end.yMdHmS
+          time: totalMinutes.toInt()
       );
-
-
-      Logger.i('Fetched Merged Activity: $resultActivity}');
-      FlutterBugfender.log('Fetched Merged Activity: $resultActivity}');
 
       return resultActivity;
     } catch (error, stackTrace) {
@@ -218,7 +200,6 @@ class HealthServices {
         'Failed to fetch health data: $error',
         stackTrace: stackTrace,
       );
-      FlutterBugfender.log('Fetched Health Exception: $error');
       return ActivityModel();
     }
   }
